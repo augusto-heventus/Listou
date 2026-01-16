@@ -489,9 +489,9 @@ const ImportarNota: React.FC = () => {
                           <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
                             loadingStatus.includes('Validando') ? 'bg-primary-100' : 'bg-gray-100'
                           }`}>
-                            {loadingStatus.includes('Validando') && !loadingStatus.includes('sucesso') ? (
+                            {loadingStatus.includes('Validando') ? (
                               <div className="w-4 h-4 border-2 border-primary-600 border-t-transparent rounded-full animate-spin"></div>
-                            ) : loadingStatus.includes('sucesso') || loadingStatus.includes('Conectando') || loadingStatus.includes('Buscando') ? (
+                            ) : loadingStatus.includes('Conectando') || loadingStatus.includes('Buscando') || loadingStatus.includes('Processando') || loadingStatus.includes('Finalizando') || loadingStatus.includes('sucesso') ? (
                               <Check className="w-4 h-4 text-green-500" />
                             ) : (
                               <Search className="w-4 h-4 text-gray-400" />
@@ -509,9 +509,9 @@ const ImportarNota: React.FC = () => {
                           <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
                             loadingStatus.includes('Conectando') ? 'bg-primary-100' : 'bg-gray-100'
                           }`}>
-                            {loadingStatus.includes('Conectando') && !loadingStatus.includes('sucesso') ? (
+                            {loadingStatus.includes('Conectando') ? (
                               <div className="w-4 h-4 border-2 border-primary-600 border-t-transparent rounded-full animate-spin"></div>
-                            ) : loadingStatus.includes('sucesso') || loadingStatus.includes('Buscando') || loadingStatus.includes('Processando') ? (
+                            ) : loadingStatus.includes('Buscando') || loadingStatus.includes('Processando') || loadingStatus.includes('Finalizando') || loadingStatus.includes('sucesso') ? (
                               <Check className="w-4 h-4 text-green-500" />
                             ) : (
                               <Database className="w-4 h-4 text-gray-400" />
@@ -529,9 +529,9 @@ const ImportarNota: React.FC = () => {
                           <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
                             loadingStatus.includes('Buscando') ? 'bg-primary-100' : 'bg-gray-100'
                           }`}>
-                            {loadingStatus.includes('Buscando') && !loadingStatus.includes('sucesso') ? (
+                            {loadingStatus.includes('Buscando') ? (
                               <div className="w-4 h-4 border-2 border-primary-600 border-t-transparent rounded-full animate-spin"></div>
-                            ) : loadingStatus.includes('sucesso') || loadingStatus.includes('Processando') || loadingStatus.includes('Finalizando') ? (
+                            ) : loadingStatus.includes('Processando') || loadingStatus.includes('Finalizando') || loadingStatus.includes('sucesso') ? (
                               <Check className="w-4 h-4 text-green-500" />
                             ) : (
                               <Search className="w-4 h-4 text-gray-400" />
