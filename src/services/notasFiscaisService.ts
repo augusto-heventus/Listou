@@ -60,7 +60,7 @@ export async function getNotaFiscalById(id: string): Promise<NotaFiscal | null> 
       .from('notas_fiscais')
       .select(`
         *,
-        nota_itens (*)
+        itens:nota_itens (*)
       `)
       .eq('id', id)
       .eq('usuario_id', user.id)
