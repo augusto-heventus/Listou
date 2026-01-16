@@ -348,7 +348,7 @@ const ImportarNota: React.FC = () => {
       <div className="card">
         {!notaImportada ? (
           <div className="space-y-4">
-            {activeTab === 'chave' ? (
+            {activeTab === 'chave' && !isLoading && (
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -372,20 +372,13 @@ const ImportarNota: React.FC = () => {
                   disabled={isLoading || chaveAcesso.replace(/\s/g, '').length !== 44}
                   className="w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {isLoading ? (
-                    <>
-                      <Loader2 className="w-5 h-5 animate-spin" />
-                      <span>Processando...</span>
-                    </>
-                  ) : (
-                    <>
-                      <Upload className="w-5 h-5" />
-                      <span>Importar Nota</span>
-                    </>
-                  )}
+                  <Upload className="w-5 h-5" />
+                  <span>Importar Nota</span>
                 </button>
               </div>
-            ) : (
+            )}
+
+            {activeTab === 'qrcode' && !isLoading && (
               <div className="space-y-4">
                 <div className="text-center">
                   <div 
@@ -442,7 +435,7 @@ const ImportarNota: React.FC = () => {
               </div>
             )}
             
-            {activeTab === 'chave' && isLoading && (
+            {isLoading && (
                   <div className="space-y-6">
                     <div className="bg-gradient-to-br from-primary-50 to-primary-100 border border-primary-200 rounded-xl p-6 shadow-sm">
                       <div className="flex items-center justify-between mb-4">
