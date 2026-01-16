@@ -218,6 +218,16 @@ const ImportarNota: React.FC = () => {
           setChaveAcesso(chave);
           setQrCodeData(chave);
           stopQrScan();
+          // Trigger the import process automatically
+          setTimeout(() => {
+            const button = document.getElementById('btn-importar-chave');
+            if (button) {
+              button.click();
+            } else {
+              // Fallback if button not found in DOM yet
+              handleImportarChave();
+            }
+          }, 100);
         } else {
           setError('QR Code não contém chave de acesso válida.');
         }
@@ -361,6 +371,7 @@ const ImportarNota: React.FC = () => {
                   </p>
                 </div>
                 <button
+                  id="btn-importar-chave"
                   onClick={handleImportarChave}
                   disabled={isLoading || chaveAcesso.replace(/\s/g, '').length !== 44}
                   className="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
