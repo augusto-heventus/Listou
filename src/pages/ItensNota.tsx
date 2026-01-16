@@ -123,7 +123,7 @@ const ItensNota: React.FC = () => {
                 <Hash className="w-4 h-4 text-gray-500" />
                 <div>
                   <p className="text-gray-600">Chave de Acesso</p>
-                  <p className="font-mono text-xs text-gray-900">{nota.chave_acesso.slice(-20)}</p>
+                  <p className="font-mono text-xs text-gray-900 break-all">{nota.chave_acesso}</p>
                 </div>
               </div>
               <div className="flex items-center space-x-2">

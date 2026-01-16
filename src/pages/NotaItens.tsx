@@ -115,7 +115,7 @@ const NotaItens: React.FC = () => {
                 <label className="block text-sm font-medium text-gray-700 mb-1">Chave de Acesso</label>
                 <div className="flex items-center space-x-2">
                   <Hash className="w-4 h-4 text-gray-500" />
-                  <p className="text-gray-900 font-mono text-sm">{nota.chave_acesso}</p>
+                  <p className="text-gray-900 font-mono text-sm break-all">{nota.chave_acesso}</p>
                 </div>
               </div>
             </div>
