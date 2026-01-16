@@ -21,14 +21,16 @@ const ImportarNota: React.FC = () => {
   const html5QrCodeRef = useRef<any>(null);
   const hasSupabaseEnv = Boolean((import.meta as any).env?.VITE_SUPABASE_URL && (import.meta as any).env?.VITE_SUPABASE_ANON_KEY)
 
-  const handleImportarChave = async () => {
-    if (!chaveAcesso.trim()) {
+  const handleImportarChave = async (chaveManual?: string) => {
+    const chaveParaProcessar = (typeof chaveManual === 'string' ? chaveManual : chaveAcesso).replace(/\s/g, '');
+    
+    if (!chaveParaProcessar) {
       setError('Por favor, insira a chave de acesso');
       return;
     }
 
     // Validação da chave de acesso
-    if (!notaFiscalService.validarChaveAcesso(chaveAcesso.replace(/\s/g, ''))) {
+    if (!notaFiscalService.validarChaveAcesso(chaveParaProcessar)) {
       setError('Chave de acesso inválida. Deve conter 44 dígitos e dígito verificador correto.');
       return;
     }
@@ -39,7 +41,7 @@ const ImportarNota: React.FC = () => {
 
     try {
       // Verificar se a chave já foi importada
-      const chaveExiste = await verificarChaveExistente(chaveAcesso.replace(/\s/g, ''));
+      const chaveExiste = await verificarChaveExistente(chaveParaProcessar);
       if (chaveExiste) {
         toast.error('Esta nota fiscal já foi importada anteriormente.');
         setLoadingStatus('');
@@ -83,7 +85,7 @@ const ImportarNota: React.FC = () => {
 
     try {
       // Chama a API real da InfoSimples
-      const response = await notaFiscalService.consultarNFCe(chaveAcesso.replace(/\s/g, ''));
+      const response = await notaFiscalService.consultarNFCe(chaveParaProcessar);
       
       setLoadingStatus('Processando resultados...');
       
@@ -220,13 +222,7 @@ const ImportarNota: React.FC = () => {
           stopQrScan();
           // Trigger the import process automatically
           setTimeout(() => {
-            const button = document.getElementById('btn-importar-chave');
-            if (button) {
-              button.click();
-            } else {
-              // Fallback if button not found in DOM yet
-              handleImportarChave();
-            }
+            handleImportarChave(chave);
           }, 100);
         } else {
           setError('QR Code não contém chave de acesso válida.');
