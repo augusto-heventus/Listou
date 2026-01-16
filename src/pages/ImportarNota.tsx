@@ -360,6 +360,23 @@ const ImportarNota: React.FC = () => {
                     {chaveAcesso.replace(/\s/g, '').length}/44 dígitos
                   </p>
                 </div>
+                <button
+                  onClick={handleImportarChave}
+                  disabled={isLoading || chaveAcesso.replace(/\s/g, '').length !== 44}
+                  className="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                      <span>Processando...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Upload className="w-5 h-5" />
+                      <span>Importar Nota Fiscal</span>
+                    </>
+                  )}
+                </button>
               </div>
             ) : (
               <div className="space-y-4">
@@ -418,7 +435,7 @@ const ImportarNota: React.FC = () => {
               </div>
             )}
             
-            {activeTab === 'chave' && !isLoading && (
+            {activeTab === 'chave' && isLoading && (
                   <div className="space-y-6">
                     <div className="bg-gradient-to-br from-primary-50 to-primary-100 border border-primary-200 rounded-xl p-6 shadow-sm">
                       <div className="flex items-center justify-between mb-4">
