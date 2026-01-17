@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Plus, Search, Eye, Trash2, Download, Receipt } from 'lucide-react';
+import { Plus, Search, Trash2, Receipt, Calendar } from 'lucide-react';
 import { formatarMoeda, formatarData } from '../utils';
 import { getNotasFiscais, deleteNotaFiscal, NotaFiscal } from '../services/notasFiscaisService';
 import { toast } from 'sonner';
@@ -163,7 +163,6 @@ const NotasFiscais: React.FC = () => {
         </div>
       )}
     </div>
-  );
   );
 };
 
