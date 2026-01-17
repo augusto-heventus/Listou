@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Plus, Trash2, Edit3, Share2, Check, Clock, Users, DollarSign, Filter, ShoppingBag, TrendingUp } from 'lucide-react';
+import { ArrowLeft, Plus, Trash2, Edit3, Share2, Check, Clock, Users, DollarSign, TrendingUp } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { formatarMoeda, formatarData } from '../utils';
 import { toast } from 'sonner';
