@@ -8,6 +8,7 @@ const ListasCompras: React.FC = () => {
   const [filterStatus, setFilterStatus] = useState<'todas' | 'ativas' | 'concluidas'>('todas');
 
   // Dados mockados para demonstração
+  // No topo do componente, adicione os tipos se necessário ou use-os conforme os dados
   const listas = [
     {
       id: '1',
@@ -15,6 +16,7 @@ const ListasCompras: React.FC = () => {
       itensCount: 15,
       itensConcluidos: 8,
       totalEstimado: 125.50,
+      totalReal: 110.20, // Novo campo
       criadaEm: new Date('2024-11-10'),
       compartilhadaCom: ['João', 'Maria'],
       status: 'ativa'
@@ -25,6 +27,7 @@ const ListasCompras: React.FC = () => {
       itensCount: 12,
       itensConcluidos: 12,
       totalEstimado: 89.90,
+      totalReal: 95.40, // Novo campo
       criadaEm: new Date('2024-11-08'),
       compartilhadaCom: [],
       status: 'concluida'
@@ -144,9 +147,16 @@ const ListasCompras: React.FC = () => {
                     <ShoppingCart className="w-4 h-4 text-primary-600" />
                     <span>{lista.itensConcluidos} de {lista.itensCount} itens</span>
                   </div>
-                  <span className="font-bold text-gray-900 bg-gray-50 px-2 py-1 rounded-lg">
-                    {formatarMoeda(lista.totalEstimado)}
-                  </span>
+                  <div className="flex flex-col items-end gap-1">
+                    <span className="font-bold text-gray-900 bg-gray-50 px-2 py-1 rounded-lg">
+                      Est: {formatarMoeda(lista.totalEstimado)}
+                    </span>
+                    {lista.totalReal && (
+                      <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-lg border border-emerald-100">
+                        Real: {formatarMoeda(lista.totalReal)}
+                      </span>
+                    )}
+                  </div>
                 </div>
 
                 <div className="space-y-1.5">
