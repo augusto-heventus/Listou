@@ -94,117 +94,148 @@ const Dashboard: React.FC = () => {
   // ];
 
   return (
-    <div className="space-y-6 pb-6">
+    <div className="page-container pb-6">
       {/* Header Premium com Saudação */}
-      <div className="px-4 pt-6">
-        <h1 className="text-2xl font-bold text-gray-900">
+      <div className="section-header">
+        <h1 className="page-title">
           {getSaudacao()}, Augusto Matos!
         </h1>
       </div>
 
       {/* Card Principal Premium - Carousel com Métricas */}
-      <div className="px-4">
-        <div className="bg-gradient-to-r from-gray-900 via-gray-800 to-black rounded-2xl p-6 text-white relative overflow-hidden">
-          {/* Ícone decorativo */}
-          <div className="absolute top-4 right-4">
-            <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
-              <Receipt className="w-6 h-6 text-white" />
-            </div>
+      <div className="bg-gradient-to-r from-gray-900 via-gray-800 to-black rounded-2xl p-6 text-white relative overflow-hidden shadow-xl">
+        {/* Ícone decorativo */}
+        <div className="absolute top-4 right-4">
+          <div className="w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center shadow-lg shadow-emerald-500/20">
+            <Receipt className="w-6 h-6 text-white" />
           </div>
-          
-          {/* Conteúdo do Carousel */}
-          <div className="space-y-4 min-h-[120px]">
-            {/* Slide 1 - Total Gasto */}
-            {slideAtivo === 0 && (
-              <div className="carousel-content">
-                <div>
-                  <p className="text-sm text-gray-300">Total gasto {resumoFinanceiro.mesAtual}</p>
-                  <p className="text-3xl font-bold">{formatarMoeda(resumoFinanceiro.totalMes)}</p>
-                </div>
-                
-                <div className="flex items-center space-x-4">
-                  <div>
-                    <p className="text-xs text-gray-400">Variação Mensal</p>
-                    <div className="flex items-center space-x-1">
-                      <span className="text-lg font-semibold">{resumoFinanceiro.variacaoMensal.toFixed(0)}%</span>
-                      {resumoFinanceiro.variacaoMensal > 0 ? (
-                        <ArrowUpRight className="w-4 h-4 text-green-400" />
-                      ) : (
-                        <ArrowDownRight className="w-4 h-4 text-red-400" />
-                      )}
-                    </div>
+        </div>
+        
+        {/* Conteúdo do Carousel */}
+        <div className="space-y-4 min-h-[140px] flex flex-col justify-center">
+          {/* Slide 1 - Total Gasto */}
+          {slideAtivo === 0 && (
+            <div className="carousel-content space-y-2">
+              <div>
+                <p className="text-xs uppercase tracking-widest text-emerald-400 font-bold">Total gasto {resumoFinanceiro.mesAtual}</p>
+                <p className="text-4xl font-black tracking-tight">{formatarMoeda(resumoFinanceiro.totalMes)}</p>
+              </div>
+              
+              <div className="flex items-center space-x-4">
+                <div className="bg-white/10 px-3 py-1.5 rounded-lg backdrop-blur-md border border-white/10">
+                  <p className="text-[10px] uppercase tracking-wider text-gray-400 font-bold mb-0.5">Variação Mensal</p>
+                  <div className="flex items-center space-x-1">
+                    <span className="text-lg font-bold">{resumoFinanceiro.variacaoMensal.toFixed(0)}%</span>
+                    {resumoFinanceiro.variacaoMensal > 0 ? (
+                      <ArrowUpRight className="w-4 h-4 text-emerald-400" />
+                    ) : (
+                      <ArrowDownRight className="w-4 h-4 text-red-400" />
+                    )}
                   </div>
                 </div>
               </div>
-            )}
+            </div>
+          )}
 
-            {/* Slide 2 - Média Mensal */}
-            {slideAtivo === 1 && (
-              <div className="carousel-content">
-                <div>
-                  <p className="text-sm text-gray-300">Média Mensal</p>
-                  <p className="text-3xl font-bold">{formatarMoeda(resumoFinanceiro.mediaMensal)}</p>
-                </div>
+          {/* Slide 2 - Média Mensal */}
+          {slideAtivo === 1 && (
+            <div className="carousel-content">
+              <div>
+                <p className="text-xs uppercase tracking-widest text-emerald-400 font-bold">Média Mensal</p>
+                <p className="text-4xl font-black tracking-tight">{formatarMoeda(resumoFinanceiro.mediaMensal)}</p>
               </div>
-            )}
+            </div>
+          )}
 
-            {/* Slide 3 - Gasto do Ano */}
-            {slideAtivo === 2 && (
-              <div className="carousel-content">
-                <div>
-                  <p className="text-sm text-gray-300">Gasto do Ano</p>
-                  <p className="text-3xl font-bold">{formatarMoeda(resumoFinanceiro.totalAno)}</p>
-                </div>
+          {/* Slide 3 - Gasto do Ano */}
+          {slideAtivo === 2 && (
+            <div className="carousel-content">
+              <div>
+                <p className="text-xs uppercase tracking-widest text-emerald-400 font-bold">Gasto do Ano</p>
+                <p className="text-4xl font-black tracking-tight">{formatarMoeda(resumoFinanceiro.totalAno)}</p>
               </div>
-            )}
+            </div>
+          )}
 
-            {/* Slide 4 - Economizado */}
-            {slideAtivo === 3 && (
-              <div className="carousel-content">
-                <div>
-                  <p className="text-sm text-gray-300">Economizado</p>
-                  <p className="text-3xl font-bold text-green-400">R$ 0,00</p>
-                </div>
+          {/* Slide 4 - Economizado */}
+          {slideAtivo === 3 && (
+            <div className="carousel-content">
+              <div>
+                <p className="text-xs uppercase tracking-widest text-emerald-400 font-bold">Economizado</p>
+                <p className="text-4xl font-black tracking-tight text-emerald-400">R$ 0,00</p>
               </div>
-            )}
-          </div>
-          
-          {/* Indicadores de carousel */}
-          <div className="flex justify-center space-x-2 mt-6">
-            {[0, 1, 2, 3].map((index) => (
-              <div
-                key={index}
-                className={`w-2 h-2 rounded-full cursor-pointer transition-colors ${
-                  slideAtivo === index ? 'bg-green-500' : 'bg-gray-600'
-                }`}
-                onClick={() => mudarSlide(index)}
-              />
-            ))}
-          </div>
+            </div>
+          )}
+        </div>
+        
+        {/* Indicadores de carousel */}
+        <div className="flex justify-center space-x-2 mt-6">
+          {[0, 1, 2, 3].map((index) => (
+            <div
+              key={index}
+              className={`h-1.5 rounded-full cursor-pointer transition-all duration-300 ${
+                slideAtivo === index ? 'w-8 bg-emerald-500' : 'w-2 bg-gray-700'
+              }`}
+              onClick={() => mudarSlide(index)}
+            />
+          ))}
         </div>
       </div>
 
-      {/* Últimas Compras - Estilo Premium */}
-      <div className="px-4">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-semibold text-gray-900">Últimas compras</h2>
-          <Link to="/notas" className="text-sm text-gray-500 hover:text-gray-700">
+      {/* Atalhos Rápidos - Grid Responsivo */}
+      <div className="grid grid-cols-3 gap-3">
+        <Link
+          to="/notas/importar"
+          className="card p-4 hover:border-emerald-200 text-center flex flex-col items-center group"
+        >
+          <div className="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+            <ScanLine className="w-6 h-6 text-emerald-600" />
+          </div>
+          <p className="text-xs font-bold text-gray-900">Importar</p>
+        </Link>
+        
+        <Link
+          to="/listas/nova"
+          className="card p-4 hover:border-emerald-200 text-center flex flex-col items-center group"
+        >
+          <div className="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+            <Plus className="w-6 h-6 text-emerald-600" />
+          </div>
+          <p className="text-xs font-bold text-gray-900">Nova Lista</p>
+        </Link>
+        
+        <Link
+          to="/receitas"
+          className="card p-4 hover:border-emerald-200 text-center flex flex-col items-center group"
+        >
+          <div className="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+            <ChefHat className="w-6 h-6 text-emerald-600" />
+          </div>
+          <p className="text-xs font-bold text-gray-900">Receitas</p>
+        </Link>
+      </div>
+
+      {/* Últimas Compras */}
+      <div className="space-y-4">
+        <div className="flex items-center justify-between px-1">
+          <h2 className="text-lg font-extrabold text-gray-900 tracking-tight">Últimas compras</h2>
+          <Link to="/notas" className="text-xs font-bold text-primary-600 hover:text-primary-700 uppercase tracking-wider">
             Ver todas
           </Link>
         </div>
         
         {isLoading ? (
-          <div className="text-center py-8">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600 mx-auto mb-4"></div>
-            <p className="text-sm text-gray-600">Carregando últimas compras...</p>
+          <div className="card text-center py-10">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600 mx-auto mb-3"></div>
+            <p className="text-sm text-gray-500 font-medium tracking-tight">Buscando registros...</p>
           </div>
         ) : ultimasCompras.length === 0 ? (
-          <div className="text-center py-8">
-            <ShoppingCart className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-sm font-medium text-gray-900 mb-2">Nenhuma compra recente</h3>
-            <p className="text-sm text-gray-600 mb-4">Importe suas primeiras notas fiscais para ver suas compras aqui.</p>
-            <Link to="/notas/importar" className="btn-primary text-sm">
-              Importar Primeira Nota
+          <div className="card text-center py-10">
+            <ShoppingCart className="w-12 h-12 text-gray-200 mx-auto mb-3" />
+            <h3 className="text-sm font-bold text-gray-900 mb-1">Sem compras registradas</h3>
+            <p className="text-xs text-gray-500 mb-4 max-w-[200px] mx-auto">Comece importando notas para visualizar seus gastos.</p>
+            <Link to="/notas/importar" className="btn-primary text-xs shadow-md">
+              Importar Nota
             </Link>
           </div>
         ) : (
@@ -213,51 +244,48 @@ const Dashboard: React.FC = () => {
               <Link
                 key={compra.id}
                 to={`/notas/${compra.id}/itens`}
-                className="block bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
+                className="card p-4 group hover:border-primary-200 relative overflow-hidden"
               >
-                <div className="flex items-center justify-between mb-3">
+                <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+                
+                <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
-                      <ShoppingCart className="w-5 h-5 text-gray-600" />
+                    <div className="w-10 h-10 bg-gray-50 rounded-xl flex items-center justify-center border border-gray-100">
+                      <ShoppingCart className="w-5 h-5 text-primary-600" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900">{compra.emitente}</h3>
-                      <p className="text-sm text-gray-500">{formatarData(compra.data_emissao)}</p>
+                      <h3 className="font-bold text-gray-900 text-sm group-hover:text-primary-700 transition-colors">{compra.emitente}</h3>
+                      <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{formatarData(compra.data_emissao)}</p>
                     </div>
                   </div>
-                  <ChevronRight className="w-5 h-5 text-gray-400" />
+                  <ChevronRight className="w-5 h-5 text-gray-300 group-hover:text-primary-500 transition-colors" />
                 </div>
                 
-                {/* Métricas em grid */}
-                <div className="grid grid-cols-5 gap-2 text-center">
-                  <div>
-                    <p className="text-xs text-gray-500">Variação</p>
-                    <div className="flex items-center justify-center space-x-1">
-                      <span className={`text-sm font-semibold ${compra.variacao > 0 ? 'text-green-600' : 'text-red-600'}`}>
-                        {compra.variacao.toFixed(1)}%
+                <div className="grid grid-cols-5 gap-2 border-t border-gray-50 pt-4">
+                  <div className="text-center">
+                    <p className="text-[9px] font-bold uppercase text-gray-400 tracking-tighter mb-1">Var.</p>
+                    <div className="flex items-center justify-center gap-0.5">
+                      <span className={`text-[11px] font-bold ${compra.variacao > 0 ? 'text-emerald-600' : 'text-red-500'}`}>
+                        {Math.abs(compra.variacao).toFixed(1)}%
                       </span>
-                      {compra.variacao > 0 ? (
-                        <ArrowUpRight className="w-3 h-3 text-green-600" />
-                      ) : (
-                        <ArrowDownRight className="w-3 h-3 text-red-600" />
-                      )}
+                      {compra.variacao > 0 ? <ArrowUpRight className="w-2.5 h-2.5 text-emerald-500" /> : <ArrowDownRight className="w-2.5 h-2.5 text-red-500" />}
                     </div>
                   </div>
-                  <div>
-                    <p className="text-xs text-gray-500">Qtd itens</p>
-                    <p className="text-sm font-semibold text-gray-900">{compra.quantidadeItens}</p>
+                  <div className="text-center">
+                    <p className="text-[9px] font-bold uppercase text-gray-400 tracking-tighter mb-1">Itens</p>
+                    <p className="text-[11px] font-bold text-gray-900">{compra.quantidadeItens}</p>
                   </div>
-                  <div>
-                    <p className="text-xs text-gray-500">Valor total</p>
-                    <p className="text-sm font-semibold text-gray-900">{formatarMoeda(compra.valor_total)}</p>
+                  <div className="text-center">
+                    <p className="text-[9px] font-bold uppercase text-gray-400 tracking-tighter mb-1">Total</p>
+                    <p className="text-[11px] font-bold text-gray-900">{formatarMoeda(compra.valor_total)}</p>
                   </div>
-                  <div>
-                    <p className="text-xs text-gray-500">Desconto</p>
-                    <p className="text-sm font-semibold text-green-600">{formatarMoeda(compra.valor_desconto)}</p>
+                  <div className="text-center">
+                    <p className="text-[9px] font-bold uppercase text-gray-400 tracking-tighter mb-1">Desc.</p>
+                    <p className="text-[11px] font-bold text-emerald-600">{formatarMoeda(compra.valor_desconto)}</p>
                   </div>
-                  <div>
-                    <p className="text-xs text-gray-500">Valor pago</p>
-                    <p className="text-sm font-semibold text-gray-900">{formatarMoeda(compra.valor_pago || compra.valor_total)}</p>
+                  <div className="text-center">
+                    <p className="text-[9px] font-bold uppercase text-gray-400 tracking-tighter mb-1">Pago</p>
+                    <p className="text-[11px] font-bold text-gray-900">{formatarMoeda(compra.valor_pago || compra.valor_total)}</p>
                   </div>
                 </div>
               </Link>
@@ -266,61 +294,19 @@ const Dashboard: React.FC = () => {
         )}
       </div>
 
-      {/* Atalhos Rápidos - Estilo Minimalista */}
-      <div className="px-4">
-        <div className="grid grid-cols-3 gap-3">
-          <Link
-            to="/notas/importar"
-            className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow text-center"
-          >
-            <div className="w-12 h-12 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-2">
-              <ScanLine className="w-6 h-6 text-emerald-600" />
-            </div>
-            <p className="text-sm font-medium text-gray-900">Importar</p>
-            <p className="text-xs text-gray-500">Nota Fiscal</p>
-          </Link>
-          
-          <Link
-            to="/listas/nova"
-            className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow text-center"
-          >
-            <div className="w-12 h-12 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-2">
-              <Plus className="w-6 h-6 text-emerald-600" />
-            </div>
-            <p className="text-sm font-medium text-gray-900">Nova</p>
-            <p className="text-xs text-gray-500">Lista</p>
-          </Link>
-          
-          <Link
-            to="/receitas"
-            className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow text-center"
-          >
-            <div className="w-12 h-12 bg-lime-50 rounded-full flex items-center justify-center mx-auto mb-2">
-              <ChefHat className="w-6 h-6 text-lime-600" />
-            </div>
-            <p className="text-sm font-medium text-gray-900">Buscar</p>
-            <p className="text-xs text-gray-500">Receitas</p>
-          </Link>
-        </div>
-      </div>
-
       {/* Seção Premium */}
       {!isPremium && (
-        <div className="px-4">
-          <div className="bg-gradient-to-r from-emerald-50 to-green-50 rounded-xl p-6 border border-emerald-200">
-            <div className="flex items-center space-x-2 mb-3">
-              <span className="text-lg">⭐</span>
-              <span className="text-sm font-semibold text-emerald-800">Recurso Premium</span>
+        <div className="bg-gradient-to-br from-primary-600 to-emerald-700 rounded-2xl p-6 text-white shadow-xl shadow-primary-900/10 border border-white/10 relative overflow-hidden">
+          <div className="absolute -right-4 -bottom-4 w-24 h-24 bg-white/10 rounded-full blur-2xl" />
+          <div className="relative z-10">
+            <div className="flex items-center space-x-2 mb-2">
+              <span className="bg-yellow-400 text-gray-900 text-[10px] font-black px-2 py-0.5 rounded uppercase tracking-wider">Premium</span>
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
-              Compare preços entre mercados
-            </h3>
-            <p className="text-gray-600 mb-4 text-sm">
-              Descubra onde economizar mais nas suas compras
-            </p>
+            <h3 className="text-xl font-black mb-1">Compare preços agora</h3>
+            <p className="text-primary-100 text-sm mb-4 max-w-[200px]">Descubra o mercado mais barato da sua região.</p>
             <Link
               to="/comparacao"
-              className="inline-flex items-center px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-lg transition-colors text-sm"
+              className="inline-flex items-center px-5 py-2.5 bg-white text-primary-700 font-black rounded-xl hover:bg-primary-50 transition-all shadow-lg active:scale-95 text-sm"
             >
               Experimentar Grátis
             </Link>
@@ -328,6 +314,7 @@ const Dashboard: React.FC = () => {
         </div>
       )}
     </div>
+  );
   );
 };
 

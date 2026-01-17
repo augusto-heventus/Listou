@@ -98,63 +98,67 @@ const Receitas: React.FC = () => {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
+    <div className="page-container">
+      <div className="section-header">
         <div className="flex items-center space-x-3">
-          <ChefHat className="w-8 h-8 text-primary-600" />
+          <div className="w-12 h-12 bg-primary-50 rounded-2xl flex items-center justify-center">
+            <ChefHat className="w-7 h-7 text-primary-600" />
+          </div>
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Receitas</h1>
-            <p className="text-sm text-gray-600">{filteredReceitas.length} receitas encontradas</p>
+            <h1 className="page-title leading-tight">Receitas</h1>
+            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+              {filteredReceitas.length} pratos sugeridos
+            </p>
           </div>
         </div>
         <Link
           to="/receitas/nova"
-          className="btn-primary inline-flex items-center space-x-2"
+          className="btn-primary inline-flex items-center space-x-2 shadow-md active:scale-95 transition-all"
         >
-          <Plus className="w-4 h-4" />
-          <span>Nova Receita</span>
+          <Plus className="w-5 h-5" />
+          <span className="hidden sm:inline">Nova Receita</span>
         </Link>
       </div>
 
       {/* Filtros e busca */}
-      <div className="space-y-4">
+      <div className="card space-y-6 bg-white p-6 rounded-2xl border-gray-100 shadow-sm">
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+          <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
           <input
             type="text"
-            placeholder="Buscar receitas por nome..."
+            placeholder="O que você quer cozinhar hoje?"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="input pl-10 w-full"
+            className="input pl-12 h-12 w-full bg-gray-50 border-transparent focus:bg-white text-base transition-all rounded-xl"
           />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Categoria</label>
+          <div className="space-y-1">
+            <label className="text-[10px] font-black uppercase text-gray-400 tracking-wider ml-1">Categoria</label>
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="input"
+              className="input bg-gray-50 border-transparent h-10 rounded-xl font-bold text-xs"
             >
               {categorias.map(categoria => (
                 <option key={categoria} value={categoria}>
-                  {categoria === 'todas' ? 'Todas as categorias' : categoria}
+                  {categoria === 'todas' ? 'Tudo' : categoria}
                 </option>
               ))}
             </select>
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Dificuldade</label>
+          <div className="space-y-1">
+            <label className="text-[10px] font-black uppercase text-gray-400 tracking-wider ml-1">Dificuldade</label>
             <select
               value={selectedDifficulty}
               onChange={(e) => setSelectedDifficulty(e.target.value)}
-              className="input"
+              className="input bg-gray-50 border-transparent h-10 rounded-xl font-bold text-xs"
             >
               {dificuldades.map(dificuldade => (
                 <option key={dificuldade} value={dificuldade}>
-                  {dificuldade === 'todas' ? 'Todas as dificuldades' : 
+                  {dificuldade === 'todas' ? 'Qualquer nível' : 
                    dificuldade === 'facil' ? 'Fácil' :
                    dificuldade === 'media' ? 'Média' : 'Difícil'}
                 </option>
@@ -162,9 +166,9 @@ const Receitas: React.FC = () => {
             </select>
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Tempo máximo: {maxTime} min
+          <div className="space-y-2">
+            <label className="text-[10px] font-black uppercase text-gray-400 tracking-wider ml-1 block">
+              Tempo: {maxTime} min
             </label>
             <input
               type="range"
@@ -173,17 +177,17 @@ const Receitas: React.FC = () => {
               step="15"
               value={maxTime}
               onChange={(e) => setMaxTime(parseInt(e.target.value))}
-              className="w-full"
+              className="w-full accent-primary-600 h-1.5 bg-gray-100 rounded-lg appearance-none cursor-pointer"
             />
           </div>
 
           <div className="flex items-end">
             <button 
               onClick={limparFiltros}
-              className="btn-outline w-full inline-flex items-center justify-center space-x-2"
+              className="w-full h-10 flex items-center justify-center gap-2 bg-gray-50 hover:bg-gray-100 text-gray-600 font-bold text-xs rounded-xl transition-all border border-gray-100"
             >
-              <Filter className="w-4 h-4" />
-              <span>Limpar Filtros</span>
+              <Filter className="w-3.5 h-3.5" />
+              <span>Limpar</span>
             </button>
           </div>
         </div>
@@ -192,68 +196,75 @@ const Receitas: React.FC = () => {
       {/* Grid de receitas */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredReceitas.map((receita) => (
-          <div key={receita.id} className="card hover:shadow-lg transition-shadow group">
-            <div className="relative mb-4">
+          <div key={receita.id} className="card p-0 group overflow-hidden hover:border-primary-200 border-transparent transition-all hover:-translate-y-1">
+            <div className="relative h-44">
               <img
                 src={receita.imagem}
                 alt={receita.titulo}
-                className="w-full h-48 object-cover rounded-lg"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
                   target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik04NSA4NUgxMTVWMTE1SDg1Vjg1WiIgZmlsbD0iIzlDQTNBRiIvPgo8L3N2Zz4K';
                 }}
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
               <button
                 onClick={() => toggleFavorita(receita.id)}
-                className="absolute top-2 right-2 p-2 bg-white rounded-full shadow-md hover:shadow-lg transition-shadow"
+                className="absolute top-3 right-3 p-2 bg-white/90 backdrop-blur-sm rounded-xl shadow-lg hover:bg-white transition-all active:scale-90"
               >
                 <Heart
-                  className={`w-5 h-5 ${
+                  className={`w-4 h-4 ${
                     receita.favorita ? 'text-red-500 fill-current' : 'text-gray-400'
                   }`}
                 />
               </button>
+              <span className={`absolute bottom-3 left-3 px-2 py-0.5 rounded-lg text-[10px] font-black uppercase tracking-wider ${
+                receita.dificuldade === 'facil' ? 'bg-emerald-500 text-white' :
+                receita.dificuldade === 'media' ? 'bg-yellow-400 text-gray-900' :
+                'bg-red-500 text-white'
+              }`}>
+                {receita.dificuldade}
+              </span>
             </div>
 
-            <div className="space-y-3">
+            <div className="p-4 space-y-4">
               <div>
-                <h3 className="font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">
+                <h3 className="font-bold text-gray-900 text-base mb-0.5 group-hover:text-primary-600 transition-colors leading-tight line-clamp-1">
                   {receita.titulo}
                 </h3>
-                <p className="text-sm text-gray-600">{receita.categoria}</p>
+                <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">{receita.categoria}</p>
               </div>
 
-              <div className="flex items-center justify-between text-sm text-gray-600">
-                <div className="flex items-center space-x-1">
-                  <Clock className="w-4 h-4" />
-                  <span>{receita.tempo_preparo} min</span>
+              <div className="grid grid-cols-3 gap-2 border-y border-gray-50 py-3">
+                <div className="text-center">
+                  <div className="flex items-center justify-center gap-1 text-gray-400 mb-0.5">
+                    <Clock className="w-3 h-3" />
+                    <span className="text-[9px] font-bold uppercase tracking-tighter">Tempo</span>
+                  </div>
+                  <p className="text-[11px] font-black text-gray-900">{receita.tempo_preparo}m</p>
                 </div>
-                <div className="flex items-center space-x-1">
-                  <Users className="w-4 h-4" />
-                  <span>{receita.rendimento} porções</span>
+                <div className="text-center">
+                  <div className="flex items-center justify-center gap-1 text-gray-400 mb-0.5">
+                    <Users className="w-3 h-3" />
+                    <span className="text-[9px] font-bold uppercase tracking-tighter">Rend.</span>
+                  </div>
+                  <p className="text-[11px] font-black text-gray-900">{receita.rendimento}p</p>
                 </div>
-                <div className="flex items-center space-x-1">
-                  <DollarSign className="w-4 h-4" />
-                  <span>{formatarMoeda(receita.custoEstimado || 0)}</span>
+                <div className="text-center">
+                  <div className="flex items-center justify-center gap-1 text-gray-400 mb-0.5">
+                    <DollarSign className="w-3 h-3" />
+                    <span className="text-[9px] font-bold uppercase tracking-tighter">Custo</span>
+                  </div>
+                  <p className="text-[11px] font-black text-emerald-600">{formatarMoeda(receita.custoEstimado || 0)}</p>
                 </div>
               </div>
 
-              <div className="flex items-center justify-between">
-                <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                  receita.dificuldade === 'facil' ? 'bg-green-100 text-green-800' :
-                  receita.dificuldade === 'media' ? 'bg-yellow-100 text-yellow-800' :
-                  'bg-red-100 text-red-800'
-                }`}>
-                  {receita.dificuldade === 'facil' ? 'Fácil' :
-                   receita.dificuldade === 'media' ? 'Média' : 'Difícil'}
-                </span>
-                <Link
-                  to={`/receitas/${receita.id}`}
-                  className="text-primary-600 hover:text-primary-700 text-sm font-medium"
-                >
-                  Ver receita →
-                </Link>
-              </div>
+              <Link
+                to={`/receitas/${receita.id}`}
+                className="w-full flex items-center justify-center py-2.5 bg-gray-50 hover:bg-primary-50 text-gray-700 hover:text-primary-700 font-bold text-xs rounded-xl transition-all border border-gray-100 hover:border-primary-100"
+              >
+                Ver Preparo
+              </Link>
             </div>
           </div>
         ))}
